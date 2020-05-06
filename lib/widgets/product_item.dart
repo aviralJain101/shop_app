@@ -21,7 +21,15 @@ class ProductItem extends StatelessWidget {
               arguments: product.id
             );
           },
-          child: Image.network(product.imageUrl,fit: BoxFit.cover,)),
+          child: Hero(
+            tag: product.id,//use this in the differrent page to the image and provide the same tag
+            child: FadeInImage(
+              placeholder: AssetImage('assets/placeholder.png'),
+              image: NetworkImage(product.imageUrl),
+              fit: BoxFit.cover,
+            ),
+          )
+        ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
           title: Text(product.title,textAlign: TextAlign.center,),

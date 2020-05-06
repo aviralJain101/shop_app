@@ -10,9 +10,35 @@ class ProductDetailsScreen extends StatelessWidget {
     final product=Provider.of<Products>(context,listen: false)
     .findById(id);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(product.title),
-      ),
+      // appBar: AppBar(
+      //   title: Text(product.title),
+      // ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 300,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(product.title),
+              background: Hero(
+                tag: product.id,
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              SizedBox(height: 20,),
+              Center(
+              child: Text(product.title),
+              )
+            ]),
+          )
+        ],
+      )
     );
   }
 }
